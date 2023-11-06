@@ -11,12 +11,15 @@ import FirebaseFirestoreSwift
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
         NavigationStack {
             VStack {
-                Image("blood_pressure")
-                    .padding(.bottom)
+                if verticalSizeClass == .regular {
+                    Image("blood_pressure")
+                        .padding(.bottom)
+                }
                 
                 Text("User ID: \(viewModel.selectedUserId)")
                 

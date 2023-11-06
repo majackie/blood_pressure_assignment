@@ -24,28 +24,39 @@ struct EditReadingItemView: View {
         _editedDiastolic = State(initialValue: readingItem.diastolic)
     }
     
+    var valuesChanged: Bool {
+        return editedSystolic != readingItem.systolic || editedDiastolic != readingItem.diastolic
+    }
+    
     var body: some View {
         VStack {
             ReadingValueInputView(label: "Systolic", value: $editedSystolic)
             ReadingValueInputView(label: "Diastolic", value: $editedDiastolic)
             
-            Button("Save") {
-                if let systolicValue = editedSystolic, let diastolicValue = editedDiastolic {
-                    if systolicValue.isNaN || diastolicValue.isNaN {
-                        print("Invalid input. Systolic and Diastolic must be valid numbers.")
+            HStack {
+                Button("Save") {
+                    if let systolicValue = editedSystolic, let diastolicValue = editedDiastolic {
+                        if systolicValue.isNaN || diastolicValue.isNaN {
+                            print("Invalid input. Systolic and Diastolic must be valid numbers.")
+                        } else {
+                            viewModel.editReadingItem(readingItem, systolic: systolicValue, diastolic: diastolicValue)
+                            isEditing = false
+                            viewModel.fetchReadingItems()
+                        }
                     } else {
-                        viewModel.editReadingItem(readingItem, systolic: systolicValue, diastolic: diastolicValue)
-                        isEditing = false
-                        viewModel.fetchReadingItems()
+                        print("Invalid input. Systolic and Diastolic values are required.")
                     }
-                } else {
-                    print("Invalid input. Systolic and Diastolic values are required.")
+                }
+                .disabled(
+                    !valuesChanged ||
+                    editedSystolic == nil || editedDiastolic == nil ||
+                    editedSystolic!.isNaN || editedDiastolic!.isNaN
+                )
+                
+                Button("Cancel") {
+                    isEditing = false
                 }
             }
-            .disabled(
-                editedSystolic == nil || editedDiastolic == nil ||
-                editedSystolic!.isNaN || editedDiastolic!.isNaN
-            )
         }
         .padding()
     }

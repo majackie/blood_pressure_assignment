@@ -18,23 +18,29 @@ struct AddReadingItemView: View {
             ReadingValueInputView(label: "Systolic", value: $systolic)
             ReadingValueInputView(label: "Diastolic", value: $diastolic)
             
-            Button("Save") {
-                if let systolicValue = systolic, let diastolicValue = diastolic {
-                    if systolicValue.isNaN || diastolicValue.isNaN {
-                        print("Invalid input. Systolic and Diastolic must be valid numbers.")
+            HStack{
+                Button("Save") {
+                    if let systolicValue = systolic, let diastolicValue = diastolic {
+                        if systolicValue.isNaN || diastolicValue.isNaN {
+                            print("Invalid input. Systolic and Diastolic must be valid numbers.")
+                        } else {
+                            viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date.now)
+                            viewModel.isAddingReadingItem = false
+                            viewModel.fetchReadingItems()
+                        }
                     } else {
-                        viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date.now)
-                        viewModel.isAddingReadingItem = false
-                        viewModel.fetchReadingItems()
+                        print("Invalid input. Systolic and Diastolic values are required.")
                     }
-                } else {
-                    print("Invalid input. Systolic and Diastolic values are required.")
+                }
+                .disabled(
+                    systolic == nil || diastolic == nil ||
+                    systolic!.isNaN || diastolic!.isNaN
+                )
+                
+                Button("Cancel") {
+                    viewModel.isAddingReadingItem = false
                 }
             }
-            .disabled(
-                systolic == nil || diastolic == nil ||
-                systolic!.isNaN || diastolic!.isNaN
-            )
         }
         .padding()
     }
