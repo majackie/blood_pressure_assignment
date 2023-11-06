@@ -59,10 +59,9 @@ struct HomeView: View {
                 Button {
                     viewModel.isAddingReadingItem.toggle()
                 } label: {
-                    if !viewModel.selectedUserId.isEmpty {
-                        Image(systemName: "plus")
-                    }
+                    Image(systemName: "plus")
                 }
+                .disabled(viewModel.selectedUserId.isEmpty)
             }
             .padding()
             .sheet(isPresented: $viewModel.isAddingReadingItem) {
