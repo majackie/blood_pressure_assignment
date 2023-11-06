@@ -10,8 +10,8 @@ import SwiftUI
 
 struct EditReadingItemView: View {
     @ObservedObject var viewModel: HomeViewModel
-    var readingItem: ReadingItem
     @Binding var isEditing: Bool
+    var readingItem: ReadingItem
     
     @State private var editedSystolic: Double?
     @State private var editedDiastolic: Double?

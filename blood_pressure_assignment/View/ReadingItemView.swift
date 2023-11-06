@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ReadingItemView: View {
-    var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     @State var isEditing = false
     var readingItem: ReadingItem
     
