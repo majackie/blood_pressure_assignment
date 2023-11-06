@@ -13,9 +13,8 @@ struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     
     @State var isAddingReadingItem = false
-    @State var systolic: Double = 0
-    @State var diastolic: Double = 0
-    @State var selectedDate: Date = Date()
+    @State var systolic: Double?
+    @State var diastolic: Double?
     
     var body: some View {
         NavigationStack {
@@ -74,16 +73,16 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         Text("Systolic: ")
-                        TextField("", value: $systolic, formatter: NumberFormatter())
+                        TextField("", value: $systolic, format: .number)
                             .keyboardType(.decimalPad)
                     }
                     HStack {
                         Text("Diastolic: ")
-                        TextField("", value: $diastolic, formatter: NumberFormatter())
+                        TextField("", value: $diastolic, format: .number)
                             .keyboardType(.decimalPad)
                     }
                     Button("Save") {
-                        viewModel.addReadingItem(systolic: systolic, diastolic: diastolic, createdDate: Date.now)
+                        viewModel.addReadingItem(systolic: systolic!, diastolic: diastolic!, createdDate: Date.now)
                         isAddingReadingItem.toggle()
                     }
                 }
