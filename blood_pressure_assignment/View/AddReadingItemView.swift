@@ -10,22 +10,14 @@ import SwiftUI
 
 struct AddReadingItemView: View {
     @ObservedObject var viewModel: HomeViewModel
-    
     @State private var systolic: Double?
     @State private var diastolic: Double?
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Systolic: ")
-                TextField("", value: $systolic, format: .number)
-                    .keyboardType(.decimalPad)
-            }
-            HStack {
-                Text("Diastolic: ")
-                TextField("", value: $diastolic, format: .number)
-                    .keyboardType(.decimalPad)
-            }
+            ReadingValueInputView(label: "Systolic", value: $systolic)
+            ReadingValueInputView(label: "Diastolic", value: $diastolic)
+            
             Button("Save") {
                 if let systolicValue = systolic, let diastolicValue = diastolic {
                     if systolicValue.isNaN || diastolicValue.isNaN {

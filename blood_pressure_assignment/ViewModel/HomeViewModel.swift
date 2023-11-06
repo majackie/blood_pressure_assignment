@@ -79,7 +79,14 @@ class HomeViewModel : ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(selectedUserId)
         
-        let newReadingItem = ReadingItem(diastolic: diastolic, systolic: systolic, createdDate: createdDate)
+        let formattedSystolic = Double(String(format: "%.2f", systolic))
+        let formattedDiastolic = Double(String(format: "%.2f", diastolic))
+        
+        let newReadingItem = ReadingItem(
+            diastolic: formattedDiastolic!,
+            systolic: formattedSystolic!,
+            createdDate: createdDate
+        )
         
         do {
             _ = try userRef.collection("readingItems").addDocument(from: newReadingItem)
@@ -87,30 +94,20 @@ class HomeViewModel : ObservableObject {
             print("Error adding readingItem: \(error.localizedDescription)")
         }
     }
-    
-    func deleteReadingItem(_ readingItemID: String) {
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(selectedUserId)
-        
-        userRef.collection("readingItems").document(readingItemID).delete { error in
-            if let error = error {
-                print("Error deleting reading item: \(error.localizedDescription)")
-            } else {
-                print("Reading item deleted successfully.")
-            }
-        }
-    }
-    
+
     func editReadingItem(_ readingItem: ReadingItem, systolic: Double, diastolic: Double) {
         let db = Firestore.firestore()
-        
+
         if let readingItemId = readingItem.id {
             let userRef = db.collection("users").document(selectedUserId)
             
+            let formattedSystolic = Double(String(format: "%.2f", systolic))
+            let formattedDiastolic = Double(String(format: "%.2f", diastolic))
+
             let updatedReadingItem = ReadingItem(
                 id: readingItemId,
-                diastolic: diastolic,
-                systolic: systolic,
+                diastolic: formattedDiastolic!,
+                systolic: formattedSystolic!,
                 createdDate: readingItem.createdDate
             )
             
@@ -124,4 +121,16 @@ class HomeViewModel : ObservableObject {
         }
     }
 
+    func deleteReadingItem(_ readingItemID: String) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(selectedUserId)
+        
+        userRef.collection("readingItems").document(readingItemID).delete { error in
+            if let error = error {
+                print("Error deleting reading item: \(error.localizedDescription)")
+            } else {
+                print("Reading item deleted successfully.")
+            }
+        }
+    }
 }

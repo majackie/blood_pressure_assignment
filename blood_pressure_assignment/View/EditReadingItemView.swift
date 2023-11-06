@@ -12,7 +12,6 @@ struct EditReadingItemView: View {
     @ObservedObject var viewModel: HomeViewModel
     @Binding var isEditing: Bool
     var readingItem: ReadingItem
-    
     @State private var editedSystolic: Double?
     @State private var editedDiastolic: Double?
     
@@ -27,16 +26,9 @@ struct EditReadingItemView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Systolic: ")
-                TextField("", value: $editedSystolic, format: .number)
-                    .keyboardType(.decimalPad)
-            }
-            HStack {
-                Text("Diastolic: ")
-                TextField("", value: $editedDiastolic, format: .number)
-                    .keyboardType(.decimalPad)
-            }
+            ReadingValueInputView(label: "Systolic", value: $editedSystolic)
+            ReadingValueInputView(label: "Diastolic", value: $editedDiastolic)
+            
             Button("Save") {
                 if let systolicValue = editedSystolic, let diastolicValue = editedDiastolic {
                     if systolicValue.isNaN || diastolicValue.isNaN {
