@@ -58,11 +58,20 @@ struct HomeView: View {
                     fetchReadingItems()
                 }
                 
-                List(readingItems) { readingItem in
-                    VStack(alignment: .leading) {
-                        Text("Systolic: \(String(format: "%.2f", readingItem.systolic)) ")
-                        Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
-                        Text("Date: \(formatDate(readingItem.createdDate))")
+                List {
+                    ForEach(readingItems) { readingItem in
+                        VStack {
+                            HStack {
+                                Text("Systolic: \(String(format: "%.2f", readingItem.systolic)) ")
+                                Spacer()
+                                Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
+                            }
+                            .listRowSeparator(.hidden)
+                            HStack {
+                                Text("Date: \(formatDate(readingItem.createdDate))")
+                                Spacer()
+                            }
+                        }
                     }
                 }
                 
@@ -142,7 +151,7 @@ struct HomeView: View {
     
     func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
     }
 }
