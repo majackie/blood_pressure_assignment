@@ -73,4 +73,17 @@ class HomeViewModel : ObservableObject {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
     }
+    
+    func addReadingItem(systolic: Double, diastolic: Double, createdDate: Date) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(selectedUserId)
+        
+        let newReadingItem = ReadingItem(diastolic: diastolic, systolic: systolic, createdDate: createdDate)
+        
+        do {
+            _ = try userRef.collection("readingItems").addDocument(from: newReadingItem)
+        } catch {
+            print("Error adding readingItem: \(error.localizedDescription)")
+        }
+    }
 }

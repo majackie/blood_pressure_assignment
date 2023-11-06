@@ -12,6 +12,11 @@ import FirebaseFirestoreSwift
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     
+    @State var isAddingReadingItem = false
+    @State var systolic: Double = 0
+    @State var diastolic: Double = 0
+    @State var selectedDate: Date = Date()
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -57,7 +62,7 @@ struct HomeView: View {
             }
             .toolbar {
                 Button {
-                    
+                    isAddingReadingItem.toggle()
                 } label: {
                     if !viewModel.selectedUserId.isEmpty {
                         Image(systemName: "plus")
@@ -65,6 +70,25 @@ struct HomeView: View {
                 }
             }
             .padding()
+            .sheet(isPresented: $isAddingReadingItem) {
+                VStack {
+                    HStack {
+                        Text("Systolic: ")
+                        TextField("", value: $systolic, formatter: NumberFormatter())
+                            .keyboardType(.decimalPad)
+                    }
+                    HStack {
+                        Text("Diastolic: ")
+                        TextField("", value: $diastolic, formatter: NumberFormatter())
+                            .keyboardType(.decimalPad)
+                    }
+                    Button("Save") {
+                        viewModel.addReadingItem(systolic: systolic, diastolic: diastolic, createdDate: Date.now)
+                        isAddingReadingItem.toggle()
+                    }
+                }
+                .padding()
+            }
         }
         .onAppear {
             viewModel.fetchUsers()
