@@ -6,18 +6,26 @@
 //
 
 import SwiftUI
+import Firebase
 import FirebaseFirestoreSwift
 
-struct HomeView: View {
-    @StateObject var viewModel: HomeViewModel
-    @FirestoreQuery var items: [ReadingData]
+struct User: Identifiable, Codable {
+    @DocumentID var id: String?
+    var name: String
+    var email: String
+    // Add other properties as needed
     
-    init(userId: String) {
-//        self._items = FirestoreQuery(collectionPath: "users/\(userId)/readingData")
-        self._items = FirestoreQuery(collectionPath: "users/N8NzAxhRXJFvdyDoNqXH/readingData")
-        
-        self._viewModel = StateObject(wrappedValue: HomeViewModel(userId: userId))
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case email
+        // Add other coding keys for additional properties
     }
+}
+
+struct HomeView: View {
+    @StateObject var viewModel = HomeViewModel()
+    @State var users: [User] = []
     
     var body: some View {
         NavigationStack {
@@ -25,11 +33,11 @@ struct HomeView: View {
                 Image("blood_pressure")
                     .padding(.bottom)
                 
-                // Text("Family Member: \(selectedMember)")
+                Text("Family Member: \(viewModel.selectedUser)")
                 
-                Picker("Select a Family Member", selection: $viewModel.selectedMember) {
-                    ForEach(familyMembers, id: \.name) { member in
-                        Text(member.name)
+                Picker("Select a Family Member", selection: $viewModel.selectedUser) {
+                    ForEach(users, id: \.name) { user in
+                        Text(user.name)
                     }
                 }
                 .pickerStyle(.segmented)
@@ -38,18 +46,47 @@ struct HomeView: View {
             }
             .toolbar {
                 Button {
-                    viewModel.showingNewItemView = true
+                    
                 } label: {
-                    if !viewModel.selectedMember.isEmpty {
+                    if !viewModel.selectedUser.isEmpty {
                         Image(systemName: "plus")
                     }
                 }
             }
             .padding()
         }
+        .onAppear {
+            // Fetch users from Firestore when the view appears
+            fetchUsers()
+        }
+    }
+    
+    func fetchUsers() {
+        let db = Firestore.firestore()
+        db.collection("users").getDocuments { querySnapshot, error in
+            if let error = error {
+                print("Error fetching users: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                print("No documents found.")
+                return
+            }
+            
+            // Parse documents into User objects and update the users array
+            users = documents.compactMap { document in
+                do {
+                    return try document.data(as: User.self)
+                } catch {
+                    print("Error decoding user: \(error.localizedDescription)")
+                    return nil
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    HomeView(userId: "N8NzAxhRXJFvdyDoNqXH")
+    HomeView()
 }
