@@ -50,7 +50,7 @@ struct HomeView: View {
                         }
                         .swipeActions(content: {
                             Button("Delete") {
-
+                                viewModel.deleteReadingItem(readingItem.id!)
                             }
                             .tint(.red)
                         })

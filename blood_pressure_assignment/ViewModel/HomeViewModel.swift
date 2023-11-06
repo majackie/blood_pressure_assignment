@@ -86,4 +86,17 @@ class HomeViewModel : ObservableObject {
             print("Error adding readingItem: \(error.localizedDescription)")
         }
     }
+    
+    func deleteReadingItem(_ readingItemID: String) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(selectedUserId)
+        
+        userRef.collection("readingItems").document(readingItemID).delete { error in
+            if let error = error {
+                print("Error deleting reading item: \(error.localizedDescription)")
+            } else {
+                print("Reading item deleted successfully.")
+            }
+        }
+    }
 }
