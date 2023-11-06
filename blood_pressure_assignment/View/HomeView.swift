@@ -53,10 +53,11 @@ struct HomeView: View {
                 }
                 .disabled(viewModel.selectedUserId.isEmpty)
             }
-            .padding()
             .sheet(isPresented: $viewModel.isAddingReadingItem) {
                 AddReadingItemView(viewModel: viewModel)
             }
+            
+            .padding()
         }
         .onAppear {
             viewModel.fetchUsers()
