@@ -65,27 +65,7 @@ struct HomeView: View {
             }
             .padding()
             .sheet(isPresented: $viewModel.isAddingReadingItem) {
-                VStack {
-                    HStack {
-                        Text("Systolic: ")
-                        TextField("", value: $viewModel.systolic, format: .number)
-                            .keyboardType(.decimalPad)
-                    }
-                    HStack {
-                        Text("Diastolic: ")
-                        TextField("", value: $viewModel.diastolic, format: .number)
-                            .keyboardType(.decimalPad)
-                    }
-                    Button("Save") {
-                        viewModel.addReadingItem(systolic: viewModel.systolic!, diastolic: viewModel.diastolic!, createdDate: Date.now)
-                        viewModel.isAddingReadingItem.toggle()
-                    }
-                    .disabled(
-                        viewModel.systolic == nil || viewModel.diastolic == nil ||
-                        viewModel.systolic!.isNaN || viewModel.diastolic!.isNaN
-                    )
-                }
-                .padding()
+                AddReadingItemView(viewModel: viewModel)
             }
         }
         .onAppear {
