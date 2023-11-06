@@ -72,6 +72,12 @@ struct HomeView: View {
                                 Spacer()
                             }
                         }
+                        .swipeActions(content: {
+                            Button("Delete") {
+
+                            }
+                            .tint(.red)
+                        })
                     }
                 }
                 
