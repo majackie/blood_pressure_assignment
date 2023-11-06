@@ -42,6 +42,7 @@
 		8F51A00C2AF8C23800760694 /* ReadingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00B2AF8C23800760694 /* ReadingItem.swift */; };
 		8F51A00E2AF8D16D00760694 /* AddReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */; };
 		8F51A0102AF8D22300760694 /* ReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00F2AF8D22300760694 /* ReadingItemView.swift */; };
+		8F51A0142AF96DC700760694 /* EditReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A0132AF96DC700760694 /* EditReadingItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		8F51A00B2AF8C23800760694 /* ReadingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingItem.swift; sourceTree = "<group>"; };
 		8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReadingItemView.swift; sourceTree = "<group>"; };
 		8F51A00F2AF8D22300760694 /* ReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingItemView.swift; sourceTree = "<group>"; };
+		8F51A0132AF96DC700760694 /* EditReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReadingItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				8F519FD92AF821D400760694 /* AboutView.swift */,
 				8F51A00F2AF8D22300760694 /* ReadingItemView.swift */,
 				8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */,
+				8F51A0132AF96DC700760694 /* EditReadingItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				8F51A00C2AF8C23800760694 /* ReadingItem.swift in Sources */,
 				8F51A00E2AF8D16D00760694 /* AddReadingItemView.swift in Sources */,
 				8F519FD82AF8211F00760694 /* HomeView.swift in Sources */,
+				8F51A0142AF96DC700760694 /* EditReadingItemView.swift in Sources */,
 				8F519FE82AF85A7A00760694 /* ContentViewModel.swift in Sources */,
 				8F519FB92AF81D9000760694 /* blood_pressure_assignmentApp.swift in Sources */,
 				8F519FEC2AF85A9A00760694 /* ChartViewModel.swift in Sources */,

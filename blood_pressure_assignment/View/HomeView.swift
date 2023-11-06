@@ -32,7 +32,7 @@ struct HomeView: View {
                 
                 List {
                     ForEach(viewModel.readingItems) { readingItem in
-                        ReadingItemView(readingItem: readingItem)
+                        ReadingItemView(viewModel: viewModel, readingItem: readingItem)
                             .swipeActions(content: {
                                 Button("Delete") {
                                     viewModel.deleteReadingItem(readingItem.id!)

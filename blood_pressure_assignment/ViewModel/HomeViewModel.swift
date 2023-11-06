@@ -100,4 +100,28 @@ class HomeViewModel : ObservableObject {
             }
         }
     }
+    
+    func editReadingItem(_ readingItem: ReadingItem, systolic: Double, diastolic: Double) {
+        let db = Firestore.firestore()
+        
+        if let readingItemId = readingItem.id {
+            let userRef = db.collection("users").document(selectedUserId)
+            
+            let updatedReadingItem = ReadingItem(
+                id: readingItemId,
+                diastolic: diastolic,
+                systolic: systolic,
+                createdDate: readingItem.createdDate
+            )
+            
+            do {
+                try userRef.collection("readingItems").document(readingItemId).setData(from: updatedReadingItem, merge: true)
+            } catch {
+                print("Error editing readingItem: \(error.localizedDescription)")
+            }
+        } else {
+            print("Error: readingItem.id is nil")
+        }
+    }
+
 }

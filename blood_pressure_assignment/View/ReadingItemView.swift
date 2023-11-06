@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct ReadingItemView: View {
+    var viewModel: HomeViewModel
+    @State var isEditing = false
     var readingItem: ReadingItem
     
     var body: some View {
@@ -19,16 +21,18 @@ struct ReadingItemView: View {
                 Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
             }
             .listRowSeparator(.hidden)
+            
             HStack {
-                Text("Date: \(formatDate(readingItem.createdDate))")
+                Text("Date: \(viewModel.formatDate(readingItem.createdDate))")
                 Spacer()
+            }
+            
+            Button("") {
+                isEditing.toggle()
+            }
+            .sheet(isPresented: $isEditing) {
+                EditReadingItemView(viewModel: viewModel, readingItem: readingItem, isEditing: $isEditing)
             }
         }
     }
-    
-    private func formatDate(_ date: Date) -> String {
-        // Implement your date formatting logic here
-        return ""
-    }
 }
-
