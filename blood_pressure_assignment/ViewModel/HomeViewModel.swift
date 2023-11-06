@@ -12,6 +12,9 @@ class HomeViewModel : ObservableObject {
     @Published var selectedUserId = ""
     @Published var users: [User] = []
     @Published var readingItems: [ReadingItem] = []
+    @Published var isAddingReadingItem = false
+    @Published var systolic: Double?
+    @Published var diastolic: Double?
     
     func fetchUsers() {
         let db = Firestore.firestore()

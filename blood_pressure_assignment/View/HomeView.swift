@@ -12,10 +12,6 @@ import FirebaseFirestoreSwift
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     
-    @State var isAddingReadingItem = false
-    @State var systolic: Double?
-    @State var diastolic: Double?
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -61,7 +57,7 @@ struct HomeView: View {
             }
             .toolbar {
                 Button {
-                    isAddingReadingItem.toggle()
+                    viewModel.isAddingReadingItem.toggle()
                 } label: {
                     if !viewModel.selectedUserId.isEmpty {
                         Image(systemName: "plus")
@@ -69,22 +65,26 @@ struct HomeView: View {
                 }
             }
             .padding()
-            .sheet(isPresented: $isAddingReadingItem) {
+            .sheet(isPresented: $viewModel.isAddingReadingItem) {
                 VStack {
                     HStack {
                         Text("Systolic: ")
-                        TextField("", value: $systolic, format: .number)
+                        TextField("", value: $viewModel.systolic, format: .number)
                             .keyboardType(.decimalPad)
                     }
                     HStack {
                         Text("Diastolic: ")
-                        TextField("", value: $diastolic, format: .number)
+                        TextField("", value: $viewModel.diastolic, format: .number)
                             .keyboardType(.decimalPad)
                     }
                     Button("Save") {
-                        viewModel.addReadingItem(systolic: systolic!, diastolic: diastolic!, createdDate: Date.now)
-                        isAddingReadingItem.toggle()
+                        viewModel.addReadingItem(systolic: viewModel.systolic!, diastolic: viewModel.diastolic!, createdDate: Date.now)
+                        viewModel.isAddingReadingItem.toggle()
                     }
+                    .disabled(
+                        viewModel.systolic == nil || viewModel.diastolic == nil ||
+                        viewModel.systolic!.isNaN || viewModel.diastolic!.isNaN
+                    )
                 }
                 .padding()
             }
