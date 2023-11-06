@@ -33,6 +33,7 @@ struct AddReadingItemView: View {
                     } else {
                         viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date.now)
                         viewModel.isAddingReadingItem = false
+                        viewModel.fetchReadingItems()
                     }
                 } else {
                     print("Invalid input. Systolic and Diastolic values are required.")

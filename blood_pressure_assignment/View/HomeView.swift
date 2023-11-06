@@ -32,24 +32,14 @@ struct HomeView: View {
                 
                 List {
                     ForEach(viewModel.readingItems) { readingItem in
-                        VStack {
-                            HStack {
-                                Text("Systolic: \(String(format: "%.2f", readingItem.systolic)) ")
-                                Spacer()
-                                Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
-                            }
-                            .listRowSeparator(.hidden)
-                            HStack {
-                                Text("Date: \(viewModel.formatDate(readingItem.createdDate))")
-                                Spacer()
-                            }
-                        }
-                        .swipeActions(content: {
-                            Button("Delete") {
-                                viewModel.deleteReadingItem(readingItem.id!)
-                            }
-                            .tint(.red)
-                        })
+                        ReadingItemView(readingItem: readingItem)
+                            .swipeActions(content: {
+                                Button("Delete") {
+                                    viewModel.deleteReadingItem(readingItem.id!)
+                                    viewModel.fetchReadingItems()
+                                }
+                                .tint(.red)
+                            })
                     }
                 }
                 

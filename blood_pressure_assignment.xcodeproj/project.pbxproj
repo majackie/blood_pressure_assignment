@@ -40,7 +40,8 @@
 		8F51A0082AF85F0400760694 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8F51A0072AF85F0400760694 /* FirebaseFirestore */; };
 		8F51A00A2AF85F0400760694 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 8F51A0092AF85F0400760694 /* FirebaseFirestoreCombine-Community */; };
 		8F51A00C2AF8C23800760694 /* ReadingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00B2AF8C23800760694 /* ReadingItem.swift */; };
-		8F51A00E2AF8D16D00760694 /* AddReadItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00D2AF8D16D00760694 /* AddReadItemView.swift */; };
+		8F51A00E2AF8D16D00760694 /* AddReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */; };
+		8F51A0102AF8D22300760694 /* ReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00F2AF8D22300760694 /* ReadingItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +60,8 @@
 		8F519FEB2AF85A9A00760694 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		8F519FED2AF85AA100760694 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 		8F51A00B2AF8C23800760694 /* ReadingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingItem.swift; sourceTree = "<group>"; };
-		8F51A00D2AF8D16D00760694 /* AddReadItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReadItemView.swift; sourceTree = "<group>"; };
+		8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReadingItemView.swift; sourceTree = "<group>"; };
+		8F51A00F2AF8D22300760694 /* ReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,8 @@
 				8F519FD72AF8211F00760694 /* HomeView.swift */,
 				8F519FDB2AF8222700760694 /* ChartView.swift */,
 				8F519FD92AF821D400760694 /* AboutView.swift */,
+				8F51A00F2AF8D22300760694 /* ReadingItemView.swift */,
+				8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,7 +160,6 @@
 				8F519FE92AF85A8D00760694 /* HomeViewModel.swift */,
 				8F519FEB2AF85A9A00760694 /* ChartViewModel.swift */,
 				8F519FED2AF85AA100760694 /* AboutViewModel.swift */,
-				8F51A00D2AF8D16D00760694 /* AddReadItemView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F51A0102AF8D22300760694 /* ReadingItemView.swift in Sources */,
 				8F519FBB2AF81D9000760694 /* ContentView.swift in Sources */,
 				8F519FEE2AF85AA100760694 /* AboutViewModel.swift in Sources */,
 				8F519FEA2AF85A8D00760694 /* HomeViewModel.swift in Sources */,
@@ -272,7 +276,7 @@
 				8F519FDA2AF821D400760694 /* AboutView.swift in Sources */,
 				8F519FDC2AF8222700760694 /* ChartView.swift in Sources */,
 				8F51A00C2AF8C23800760694 /* ReadingItem.swift in Sources */,
-				8F51A00E2AF8D16D00760694 /* AddReadItemView.swift in Sources */,
+				8F51A00E2AF8D16D00760694 /* AddReadingItemView.swift in Sources */,
 				8F519FD82AF8211F00760694 /* HomeView.swift in Sources */,
 				8F519FE82AF85A7A00760694 /* ContentViewModel.swift in Sources */,
 				8F519FB92AF81D9000760694 /* blood_pressure_assignmentApp.swift in Sources */,
