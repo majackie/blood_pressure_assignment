@@ -9,5 +9,5 @@ import Foundation
 import FirebaseFirestore
 
 class HomeViewModel : ObservableObject {
-    @Published var selectedUser = ""
+    @Published var selectedUserId = ""
 }

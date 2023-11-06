@@ -13,19 +13,32 @@ struct User: Identifiable, Codable {
     @DocumentID var id: String?
     var name: String
     var email: String
-    // Add other properties as needed
     
     private enum CodingKeys: String, CodingKey {
         case id
         case name
         case email
-        // Add other coding keys for additional properties
+    }
+}
+
+struct ReadingItem: Identifiable, Codable {
+    @DocumentID var id: String?
+    var diastolic: Double
+    var systolic: Double
+    var createdDate: Date
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case diastolic
+        case systolic
+        case createdDate
     }
 }
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @State var users: [User] = []
+    @State var readingItems: [ReadingItem] = []
     
     var body: some View {
         NavigationStack {
@@ -33,14 +46,25 @@ struct HomeView: View {
                 Image("blood_pressure")
                     .padding(.bottom)
                 
-                Text("Family Member: \(viewModel.selectedUser)")
+                Text("User ID: \(viewModel.selectedUserId)")
                 
-                Picker("Select a Family Member", selection: $viewModel.selectedUser) {
-                    ForEach(users, id: \.name) { user in
+                Picker("Select a Family Member", selection: $viewModel.selectedUserId) {
+                    ForEach(users, id: \.id!) { user in
                         Text(user.name)
                     }
                 }
                 .pickerStyle(.segmented)
+                .onChange(of: viewModel.selectedUserId) { newValue, _ in
+                    fetchReadingItems()
+                }
+                
+                List(readingItems) { readingItem in
+                    VStack(alignment: .leading) {
+                        Text("Systolic: \(String(format: "%.2f", readingItem.systolic)) ")
+                        Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
+                        Text("Date: \(formatDate(readingItem.createdDate))")
+                    }
+                }
                 
                 Spacer()
             }
@@ -48,7 +72,7 @@ struct HomeView: View {
                 Button {
                     
                 } label: {
-                    if !viewModel.selectedUser.isEmpty {
+                    if !viewModel.selectedUserId.isEmpty {
                         Image(systemName: "plus")
                     }
                 }
@@ -56,7 +80,6 @@ struct HomeView: View {
             .padding()
         }
         .onAppear {
-            // Fetch users from Firestore when the view appears
             fetchUsers()
         }
     }
@@ -70,11 +93,10 @@ struct HomeView: View {
             }
             
             guard let documents = querySnapshot?.documents else {
-                print("No documents found.")
+                print("No users found.")
                 return
             }
             
-            // Parse documents into User objects and update the users array
             users = documents.compactMap { document in
                 do {
                     return try document.data(as: User.self)
@@ -84,6 +106,44 @@ struct HomeView: View {
                 }
             }
         }
+    }
+    
+    func fetchReadingItems() {
+        guard !viewModel.selectedUserId.isEmpty else {
+            print("No selected user to fetch reading items for.")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(viewModel.selectedUserId)
+        
+        userRef.collection("readingItems").getDocuments { querySnapshot, error in
+            if let error = error {
+                print("Error fetching readingItems: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                print("No readingItems found for the selected user.")
+                return
+            }
+            
+            readingItems = documents.compactMap { document in
+                do {
+                    return try document.data(as: ReadingItem.self)
+                } catch {
+                    print("Error decoding reading item: \(error.localizedDescription)")
+                    return nil
+                }
+            }
+            print(readingItems)
+        }
+    }
+    
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        return dateFormatter.string(from: date)
     }
 }
 
