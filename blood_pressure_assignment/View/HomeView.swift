@@ -59,7 +59,6 @@ struct HomeView: View {
             .sheet(isPresented: $viewModel.isAddingReadingItem) {
                 AddReadingItemView(viewModel: viewModel)
             }
-            
             .padding()
         }
         .onAppear {
