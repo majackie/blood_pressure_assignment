@@ -38,7 +38,7 @@ struct EditReadingItemView: View {
                     if let systolicValue = Double(editedSystolic), let diastolicValue = Double(editedDiastolic) {
                         if !systolicValue.isNaN && !diastolicValue.isNaN {
                             viewModel.editReadingItem(readingItem, systolic: systolicValue, diastolic: diastolicValue)
-                            isEditing = false
+                            isEditing.toggle()
                             viewModel.fetchReadingItems()
                         } else {
                             print("Invalid input. Systolic and Diastolic must be valid numbers.")
@@ -52,7 +52,7 @@ struct EditReadingItemView: View {
                 )
                 
                 Button("Cancel") {
-                    isEditing = false
+                    isEditing.toggle()
                 }
             }
         }
