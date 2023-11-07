@@ -12,20 +12,20 @@ struct EditReadingItemView: View {
     @ObservedObject var viewModel: HomeViewModel
     @Binding var isEditing: Bool
     var readingItem: ReadingItem
-    @State private var editedSystolic: Double?
-    @State private var editedDiastolic: Double?
+    @State var editedSystolic: String = ""
+    @State var editedDiastolic: String = ""
     
     init(viewModel: HomeViewModel, readingItem: ReadingItem, isEditing: Binding<Bool>) {
         self.viewModel = viewModel
         self.readingItem = readingItem
         self._isEditing = isEditing
         
-        _editedSystolic = State(initialValue: readingItem.systolic)
-        _editedDiastolic = State(initialValue: readingItem.diastolic)
+        _editedSystolic = State(initialValue: String(readingItem.systolic))
+        _editedDiastolic = State(initialValue: String(readingItem.diastolic))
     }
     
     var valuesChanged: Bool {
-        return editedSystolic != readingItem.systolic || editedDiastolic != readingItem.diastolic
+        return editedSystolic != String(readingItem.systolic) || editedDiastolic != String(readingItem.diastolic)
     }
     
     var body: some View {
@@ -35,22 +35,20 @@ struct EditReadingItemView: View {
             
             HStack {
                 Button("Save") {
-                    if let systolicValue = editedSystolic, let diastolicValue = editedDiastolic {
-                        if systolicValue.isNaN || diastolicValue.isNaN {
-                            print("Invalid input. Systolic and Diastolic must be valid numbers.")
-                        } else {
+                    if let systolicValue = Double(editedSystolic), let diastolicValue = Double(editedDiastolic) {
+                        if !systolicValue.isNaN && !diastolicValue.isNaN {
                             viewModel.editReadingItem(readingItem, systolic: systolicValue, diastolic: diastolicValue)
                             isEditing = false
                             viewModel.fetchReadingItems()
+                        } else {
+                            print("Invalid input. Systolic and Diastolic must be valid numbers.")
                         }
                     } else {
                         print("Invalid input. Systolic and Diastolic values are required.")
                     }
                 }
                 .disabled(
-                    !valuesChanged ||
-                    editedSystolic == nil || editedDiastolic == nil ||
-                    editedSystolic!.isNaN || editedDiastolic!.isNaN
+                    !valuesChanged || !isValidNumber(editedSystolic) || !isValidNumber(editedDiastolic)
                 )
                 
                 Button("Cancel") {
@@ -60,4 +58,9 @@ struct EditReadingItemView: View {
         }
         .padding()
     }
+    
+    func isValidNumber(_ value: String) -> Bool {
+        return Double(value) != nil
+    }
 }
+

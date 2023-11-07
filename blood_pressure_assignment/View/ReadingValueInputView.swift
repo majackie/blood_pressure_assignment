@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ReadingValueInputView: View {
     let label: String
-    @Binding var value: Double?
+    @Binding var value: String
     
     var body: some View {
         HStack {
             Text(label + ": ")
-            TextField("", value: $value, format: .number)
+            TextField("", text: $value)
                 .keyboardType(.decimalPad)
         }
     }

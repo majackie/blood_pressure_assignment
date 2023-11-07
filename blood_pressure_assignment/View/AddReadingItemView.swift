@@ -10,31 +10,30 @@ import SwiftUI
 
 struct AddReadingItemView: View {
     @ObservedObject var viewModel: HomeViewModel
-    @State private var systolic: Double?
-    @State private var diastolic: Double?
+    @State var systolic: String = ""
+    @State var diastolic: String = ""
     
     var body: some View {
         VStack {
             ReadingValueInputView(label: "Systolic", value: $systolic)
             ReadingValueInputView(label: "Diastolic", value: $diastolic)
             
-            HStack{
+            HStack {
                 Button("Save") {
-                    if let systolicValue = systolic, let diastolicValue = diastolic {
-                        if systolicValue.isNaN || diastolicValue.isNaN {
-                            print("Invalid input. Systolic and Diastolic must be valid numbers.")
-                        } else {
-                            viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date.now)
+                    if let systolicValue = Double(systolic), let diastolicValue = Double(diastolic) {
+                        if !systolicValue.isNaN && !diastolicValue.isNaN {
+                            viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date())
                             viewModel.isAddingReadingItem = false
                             viewModel.fetchReadingItems()
+                        } else {
+                            print("Invalid input. Systolic and Diastolic must be valid numbers.")
                         }
                     } else {
                         print("Invalid input. Systolic and Diastolic values are required.")
                     }
                 }
                 .disabled(
-                    systolic == nil || diastolic == nil ||
-                    systolic!.isNaN || diastolic!.isNaN
+                    !isValidNumber(systolic) || !isValidNumber(diastolic)
                 )
                 
                 Button("Cancel") {
@@ -43,5 +42,9 @@ struct AddReadingItemView: View {
             }
         }
         .padding()
+    }
+    
+    func isValidNumber(_ value: String) -> Bool {
+        return Double(value) != nil
     }
 }
