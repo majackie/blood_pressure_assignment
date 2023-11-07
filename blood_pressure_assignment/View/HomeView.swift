@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct HomeView: View {
-    @StateObject var viewModel = HomeViewModel()
+    @StateObject var viewModel = DatabaseViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {

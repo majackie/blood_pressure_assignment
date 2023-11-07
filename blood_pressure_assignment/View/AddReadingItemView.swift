@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AddReadingItemView: View {
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: DatabaseViewModel
     @State var systolic: String = ""
     @State var diastolic: String = ""
     
@@ -33,7 +33,7 @@ struct AddReadingItemView: View {
                     }
                 }
                 .disabled(
-                    !isValidNumber(systolic) || !isValidNumber(diastolic)
+                    !viewModel.isValidNumber(systolic) || !viewModel.isValidNumber(diastolic)
                 )
                 
                 Button("Cancel") {
@@ -42,9 +42,5 @@ struct AddReadingItemView: View {
             }
         }
         .padding()
-    }
-    
-    func isValidNumber(_ value: String) -> Bool {
-        return Double(value) != nil
     }
 }

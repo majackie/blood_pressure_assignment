@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 
 struct EditReadingItemView: View {
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: DatabaseViewModel
     @Binding var isEditing: Bool
     var readingItem: ReadingItem
     @State var editedSystolic: String = ""
     @State var editedDiastolic: String = ""
     
-    init(viewModel: HomeViewModel, readingItem: ReadingItem, isEditing: Binding<Bool>) {
+    init(viewModel: DatabaseViewModel, readingItem: ReadingItem, isEditing: Binding<Bool>) {
         self.viewModel = viewModel
         self.readingItem = readingItem
         self._isEditing = isEditing
@@ -48,7 +48,7 @@ struct EditReadingItemView: View {
                     }
                 }
                 .disabled(
-                    !valuesChanged || !isValidNumber(editedSystolic) || !isValidNumber(editedDiastolic)
+                    !valuesChanged || !viewModel.isValidNumber(editedSystolic) || !viewModel.isValidNumber(editedDiastolic)
                 )
                 
                 Button("Cancel") {
@@ -57,10 +57,6 @@ struct EditReadingItemView: View {
             }
         }
         .padding()
-    }
-    
-    func isValidNumber(_ value: String) -> Bool {
-        return Double(value) != nil
     }
 }
 
