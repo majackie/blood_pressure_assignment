@@ -79,6 +79,8 @@ class DatabaseViewModel : ObservableObject {
                     return nil
                 }
             }
+            
+            self.readingItems.sort { $0.createdDate > $1.createdDate }
         }
     }
     
