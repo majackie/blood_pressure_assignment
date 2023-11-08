@@ -20,12 +20,12 @@ struct EditReadingItemView: View {
         self.readingItem = readingItem
         self._isEditing = isEditing
         
-        _editedSystolic = State(initialValue: String(readingItem.systolic))
-        _editedDiastolic = State(initialValue: String(readingItem.diastolic))
+        _editedSystolic = State(initialValue: String(format: "%.2f", readingItem.systolic))
+        _editedDiastolic = State(initialValue: String(format: "%.2f", readingItem.diastolic))
     }
     
     var valuesChanged: Bool {
-        return editedSystolic != String(readingItem.systolic) || editedDiastolic != String(readingItem.diastolic)
+        return editedSystolic != String(format: "%.2f", readingItem.systolic) || editedDiastolic != String(format: "%.2f", readingItem.diastolic)
     }
     
     var body: some View {

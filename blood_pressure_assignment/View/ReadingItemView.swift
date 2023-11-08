@@ -19,10 +19,10 @@ struct ReadingItemView: View {
                 isEditing.toggle()
             } label: {
                 HStack {
-                    Text("Systolic: \(String(readingItem.systolic))")
+                    Text("Systolic: \(String(format: "%.2f", readingItem.systolic))")
                         .foregroundColor(.black)
                     Spacer()
-                    Text("Diastolic: \(String(readingItem.diastolic))")
+                    Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
                         .foregroundColor(.black)
                 }
                 .listRowSeparator(.hidden)
