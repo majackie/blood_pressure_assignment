@@ -36,11 +36,11 @@ class ReportViewModel : ObservableObject {
         } else if (120...129).contains(systolic) && diastolic < 80  {
             return "Elevated"
         } else if (130...139).contains(systolic) || (80...89).contains(diastolic) {
-            return "High Blood Pressure (Stage 1)"
+            return "Stage 1"
         } else if (140...179).contains(systolic) || (90...119).contains(diastolic) {
-            return "High Blood Pressure (Stage 2)"
+            return "Stage 2"
         } else if systolic > 180 || diastolic > 120 {
-            return "Hypertensive Crisis"
+            return "Hypertensive"
         } else {
             return "NA"
         }
