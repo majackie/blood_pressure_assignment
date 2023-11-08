@@ -14,7 +14,7 @@ struct ReadingItemInputView: View {
     
     var body: some View {
         HStack {
-            Text(label + ": ")
+            Text(label + ":")
             TextField("", text: $value)
                 .keyboardType(.decimalPad)
         }

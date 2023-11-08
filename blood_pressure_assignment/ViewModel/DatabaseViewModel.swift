@@ -15,7 +15,7 @@ class DatabaseViewModel : ObservableObject {
     
     func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "EEE, MMM dd"
         return dateFormatter.string(from: date)
     }
     

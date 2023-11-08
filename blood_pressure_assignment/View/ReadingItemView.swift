@@ -18,19 +18,13 @@ struct ReadingItemView: View {
             Button {
                 isEditing.toggle()
             } label: {
-                HStack {
+                VStack(alignment: .leading) {
                     Text("Systolic: \(String(format: "%.2f", readingItem.systolic))")
                         .foregroundColor(.black)
-                    Spacer()
                     Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
                         .foregroundColor(.black)
-                }
-                .listRowSeparator(.hidden)
-                
-                HStack {
                     Text("Date: \(viewModel.formatDate(readingItem.createdDate))")
                         .foregroundColor(.black)
-                    Spacer()
                 }
             }
             .sheet(isPresented: $isEditing) {

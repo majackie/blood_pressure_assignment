@@ -42,6 +42,10 @@ struct ReportView: View {
                 
                 Spacer()
             }
+            .toolbar {
+                Text("")
+                .disabled(viewModel.selectedUserId.isEmpty)
+            }
             .padding()
         }
         .onAppear {

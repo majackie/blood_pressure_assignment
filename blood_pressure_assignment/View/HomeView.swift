@@ -17,12 +17,12 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if verticalSizeClass == .regular {
-                    Image("blood_pressure")
-                        .padding(.bottom)
-                }
+//                if verticalSizeClass == .regular {
+//                    Image("blood_pressure")
+//                        .padding(.bottom)
+//                }
                 
-                Text("Add, Edit or Delete Readings")
+                Text("Add, Edit or Delete Readings\n")
                     .font(.title2)
                 
                 Picker("Select a Family Member", selection: $viewModel.selectedUserId) {
