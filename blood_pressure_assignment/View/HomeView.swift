@@ -22,7 +22,8 @@ struct HomeView: View {
                         .padding(.bottom)
                 }
                 
-                Text("User ID: \(viewModel.selectedUserId)")
+                Text("Add, Edit or Delete Readings")
+                    .font(.title2)
                 
                 Picker("Select a Family Member", selection: $viewModel.selectedUserId) {
                     ForEach(viewModel.users, id: \.id!) { user in
@@ -46,6 +47,7 @@ struct HomeView: View {
                             })
                     }
                 }
+                .listStyle(PlainListStyle())
                 
                 Spacer()
             }

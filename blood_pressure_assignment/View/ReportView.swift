@@ -14,7 +14,8 @@ struct ReportView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("User ID: \(viewModel.selectedUserId)")
+                Text("Month to Date Average Readings\n")
+                    .font(.title2)
                 
                 Picker("Select a Family Member", selection: $viewModel.selectedUserId) {
                     ForEach(viewModel.users, id: \.id!) { user in
@@ -30,14 +31,14 @@ struct ReportView: View {
                     let readingItems: [ReadingItem] = viewModel.readingItems
                     ForEach(reportViewModel.calculateMonthlyAverages(readingItems: readingItems), id: \.month) { monthlyAverage in
                         VStack(alignment: .leading) {
-                            Text("MTD avg readings for " + monthlyAverage.month)
-                                .fontWeight(.bold)
-                            Text("Systolic Reading: \(String(format: "%.2f", monthlyAverage.averageSystolic))")
-                            Text("Diastolic Reading: \(String(format: "%.2f", monthlyAverage.averageDiastolic))")
+                            Text("Month: " + monthlyAverage.month)
+                            Text("Systolic: \(String(format: "%.2f", monthlyAverage.averageSystolic))")
+                            Text("Diastolic: \(String(format: "%.2f", monthlyAverage.averageDiastolic))")
                             Text("Average Condition: \(String(monthlyAverage.averageCondition))")
                         }
                     }
                 }
+                .listStyle(PlainListStyle())
                 
                 Spacer()
             }
