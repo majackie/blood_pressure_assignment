@@ -16,9 +16,9 @@ struct ReadingItemView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Systolic: \(String(format: "%.2f", readingItem.systolic)) ")
+                Text("Systolic: \(String(readingItem.systolic))")
                 Spacer()
-                Text("Diastolic: \(String(format: "%.2f", readingItem.diastolic))")
+                Text("Diastolic: \(String(readingItem.diastolic))")
             }
             .listRowSeparator(.hidden)
             

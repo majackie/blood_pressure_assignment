@@ -70,7 +70,10 @@ class DatabaseViewModel : ObservableObject {
             
             self.readingItems = documents.compactMap { document in
                 do {
-                    return try document.data(as: ReadingItem.self)
+                    var readingItem = try document.data(as: ReadingItem.self)
+                    readingItem.systolic = Double(String(format: "%.2f", readingItem.systolic))!
+                    readingItem.diastolic = Double(String(format: "%.2f", readingItem.diastolic))!
+                    return readingItem
                 } catch {
                     print("Error decoding reading item: \(error.localizedDescription)")
                     return nil
@@ -87,8 +90,8 @@ class DatabaseViewModel : ObservableObject {
         let formattedDiastolic = Double(String(format: "%.2f", diastolic))
         
         let newReadingItem = ReadingItem(
-            diastolic: formattedDiastolic!,
             systolic: formattedSystolic!,
+            diastolic: formattedDiastolic!,
             createdDate: createdDate
         )
         
@@ -110,8 +113,8 @@ class DatabaseViewModel : ObservableObject {
 
             let updatedReadingItem = ReadingItem(
                 id: readingItemId,
-                diastolic: formattedDiastolic!,
                 systolic: formattedSystolic!,
+                diastolic: formattedDiastolic!,
                 createdDate: readingItem.createdDate
             )
             

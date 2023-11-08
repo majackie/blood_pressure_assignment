@@ -10,14 +10,14 @@ import FirebaseFirestoreSwift
 
 struct ReadingItem: Identifiable, Codable {
     @DocumentID var id: String?
-    var diastolic: Double
     var systolic: Double
+    var diastolic: Double
     var createdDate: Date
     
     private enum CodingKeys: String, CodingKey {
         case id
-        case diastolic
         case systolic
+        case diastolic
         case createdDate
     }
 }
