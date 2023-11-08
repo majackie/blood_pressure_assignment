@@ -9,22 +9,26 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
-    @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
-        ZStack {
-            VStack {
-                if verticalSizeClass == .regular {
-                    Image("blood_pressure")
-                        .padding(.bottom)
-                }
+        NavigationStack {
+            VStack {                
+                NotificationView()
                 
                 Text("A00889988 | Jackie Ma")
+                    .font(.title2)
+                
+                Spacer()
             }
+            .toolbar {
+                Text("")
+            }
+            .padding()
         }
     }
 }
 
 #Preview {
     HomeView()
+        .environmentObject(NotificationViewModel())
 }

@@ -10,16 +10,11 @@ import SwiftUI
 struct ReportView: View {
     @StateObject var viewModel = DatabaseViewModel()
     @StateObject var reportViewModel = ReportViewModel()
-    @EnvironmentObject var notificationViewModel: NotificationViewModel
     
     var body: some View {
         NavigationStack {
             VStack {
-                if notificationViewModel.showBanner {
-                    NotificationView(message: "Warning: Reading in Hypertensive Crisis range. Please consult your doctor immediately.", dismissAction: {
-                        notificationViewModel.showBanner.toggle()
-                    })
-                }
+                NotificationView()
                 
                 Text("Month to Date Average Readings\n")
                     .font(.title2)
@@ -51,7 +46,6 @@ struct ReportView: View {
             }
             .toolbar {
                 Text("")
-                .disabled(viewModel.selectedUserId.isEmpty)
             }
             .padding()
         }

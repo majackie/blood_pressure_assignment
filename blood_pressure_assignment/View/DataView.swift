@@ -13,16 +13,11 @@ struct DataView: View {
     @StateObject var viewModel = DatabaseViewModel()
     @StateObject var dataViewModel = DataViewModel()
     @StateObject var reportViewModel = ReportViewModel()
-    @EnvironmentObject var notificationViewModel: NotificationViewModel
     
     var body: some View {
         NavigationStack {
             VStack {
-                if notificationViewModel.showBanner {
-                    NotificationView(message: "Warning: Reading in Hypertensive Crisis range. Please consult your doctor immediately.", dismissAction: {
-                        notificationViewModel.showBanner.toggle()
-                    })
-                }
+                NotificationView()
                 
                 Text("Add, Edit or Delete Readings\n")
                     .font(.title2)
