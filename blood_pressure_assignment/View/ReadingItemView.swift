@@ -15,20 +15,23 @@ struct ReadingItemView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Systolic: \(String(readingItem.systolic))")
-                Spacer()
-                Text("Diastolic: \(String(readingItem.diastolic))")
-            }
-            .listRowSeparator(.hidden)
-            
-            HStack {
-                Text("Date: \(viewModel.formatDate(readingItem.createdDate))")
-                Spacer()
-            }
-            
-            Button("") {
+            Button {
                 isEditing.toggle()
+            } label: {
+                HStack {
+                    Text("Systolic: \(String(readingItem.systolic))")
+                        .foregroundColor(.black)
+                    Spacer()
+                    Text("Diastolic: \(String(readingItem.diastolic))")
+                        .foregroundColor(.black)
+                }
+                .listRowSeparator(.hidden)
+                
+                HStack {
+                    Text("Date: \(viewModel.formatDate(readingItem.createdDate))")
+                        .foregroundColor(.black)
+                    Spacer()
+                }
             }
             .sheet(isPresented: $isEditing) {
                 EditReadingItemView(viewModel: viewModel, readingItem: readingItem, isEditing: $isEditing)
