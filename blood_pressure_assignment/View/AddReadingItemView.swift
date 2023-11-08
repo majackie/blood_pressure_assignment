@@ -15,8 +15,8 @@ struct AddReadingItemView: View {
     
     var body: some View {
         VStack {
-            ReadingValueInputView(label: "Systolic", value: $systolic)
-            ReadingValueInputView(label: "Diastolic", value: $diastolic)
+            ReadingItemInputView(label: "Systolic", value: $systolic)
+            ReadingItemInputView(label: "Diastolic", value: $diastolic)
             
             HStack {
                 Button("Save") {

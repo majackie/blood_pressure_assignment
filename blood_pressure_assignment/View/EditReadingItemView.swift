@@ -30,8 +30,8 @@ struct EditReadingItemView: View {
     
     var body: some View {
         VStack {
-            ReadingValueInputView(label: "Systolic", value: $editedSystolic)
-            ReadingValueInputView(label: "Diastolic", value: $editedDiastolic)
+            ReadingItemInputView(label: "Systolic", value: $editedSystolic)
+            ReadingItemInputView(label: "Diastolic", value: $editedDiastolic)
             
             HStack {
                 Button("Save") {

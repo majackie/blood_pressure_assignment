@@ -43,8 +43,9 @@
 		8F51A00E2AF8D16D00760694 /* AddReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */; };
 		8F51A0102AF8D22300760694 /* ReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A00F2AF8D22300760694 /* ReadingItemView.swift */; };
 		8F51A0142AF96DC700760694 /* EditReadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A0132AF96DC700760694 /* EditReadingItemView.swift */; };
-		8F51A0162AF9790B00760694 /* ReadingValueInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A0152AF9790B00760694 /* ReadingValueInputView.swift */; };
+		8F51A0162AF9790B00760694 /* ReadingItemInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51A0152AF9790B00760694 /* ReadingItemInputView.swift */; };
 		8F7D91012AFAF8C300ECF2C7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7D91002AFAF8C300ECF2C7 /* HomeViewModel.swift */; };
+		8F7D91032AFB41E500ECF2C7 /* MonthlyAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7D91022AFB41E500ECF2C7 /* MonthlyAverage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,8 +67,9 @@
 		8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReadingItemView.swift; sourceTree = "<group>"; };
 		8F51A00F2AF8D22300760694 /* ReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingItemView.swift; sourceTree = "<group>"; };
 		8F51A0132AF96DC700760694 /* EditReadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReadingItemView.swift; sourceTree = "<group>"; };
-		8F51A0152AF9790B00760694 /* ReadingValueInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingValueInputView.swift; sourceTree = "<group>"; };
+		8F51A0152AF9790B00760694 /* ReadingItemInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingItemInputView.swift; sourceTree = "<group>"; };
 		8F7D91002AFAF8C300ECF2C7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8F7D91022AFB41E500ECF2C7 /* MonthlyAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyAverage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +156,7 @@
 				8F519FDB2AF8222700760694 /* ReportView.swift */,
 				8F519FD92AF821D400760694 /* AboutView.swift */,
 				8F51A00F2AF8D22300760694 /* ReadingItemView.swift */,
-				8F51A0152AF9790B00760694 /* ReadingValueInputView.swift */,
+				8F51A0152AF9790B00760694 /* ReadingItemInputView.swift */,
 				8F51A00D2AF8D16D00760694 /* AddReadingItemView.swift */,
 				8F51A0132AF96DC700760694 /* EditReadingItemView.swift */,
 			);
@@ -178,6 +180,7 @@
 			children = (
 				8F519FE32AF8410F00760694 /* User.swift */,
 				8F51A00B2AF8C23800760694 /* ReadingItem.swift */,
+				8F7D91022AFB41E500ECF2C7 /* MonthlyAverage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				8F51A0102AF8D22300760694 /* ReadingItemView.swift in Sources */,
 				8F519FBB2AF81D9000760694 /* ContentView.swift in Sources */,
 				8F519FEE2AF85AA100760694 /* AboutViewModel.swift in Sources */,
+				8F7D91032AFB41E500ECF2C7 /* MonthlyAverage.swift in Sources */,
 				8F7D91012AFAF8C300ECF2C7 /* HomeViewModel.swift in Sources */,
 				8F519FEA2AF85A8D00760694 /* DatabaseViewModel.swift in Sources */,
 				8F519FE42AF8410F00760694 /* User.swift in Sources */,
@@ -290,7 +294,7 @@
 				8F519FD82AF8211F00760694 /* HomeView.swift in Sources */,
 				8F51A0142AF96DC700760694 /* EditReadingItemView.swift in Sources */,
 				8F519FE82AF85A7A00760694 /* ContentViewModel.swift in Sources */,
-				8F51A0162AF9790B00760694 /* ReadingValueInputView.swift in Sources */,
+				8F51A0162AF9790B00760694 /* ReadingItemInputView.swift in Sources */,
 				8F519FB92AF81D9000760694 /* blood_pressure_assignmentApp.swift in Sources */,
 				8F519FEC2AF85A9A00760694 /* ReportViewModel.swift in Sources */,
 			);
