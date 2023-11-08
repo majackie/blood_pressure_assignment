@@ -11,6 +11,8 @@ import SwiftUI
 struct AddReadingItemView: View {
     @ObservedObject var viewModel: DatabaseViewModel
     @ObservedObject var dataViewModel: DataViewModel
+    @ObservedObject var reportViewModel: ReportViewModel
+    @EnvironmentObject var notificationViewModel: NotificationViewModel
     @State var systolic: String = ""
     @State var diastolic: String = ""
     
@@ -26,6 +28,10 @@ struct AddReadingItemView: View {
                             viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date())
                             dataViewModel.isAddingReadingItem.toggle()
                             viewModel.fetchReadingItems()
+                            
+                            if systolicValue > 180 || diastolicValue > 120 {
+                                notificationViewModel.showBanner = true
+                            }
                         } else {
                             print("Invalid input. Systolic and Diastolic must be valid numbers.")
                         }

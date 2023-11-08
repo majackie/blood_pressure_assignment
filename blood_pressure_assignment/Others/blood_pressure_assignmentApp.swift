@@ -20,10 +20,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct blood_pressure_assignmentApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var notificationViewModel = NotificationViewModel()
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 ContentView()
+                    .environmentObject(notificationViewModel)
             }
         }
     }

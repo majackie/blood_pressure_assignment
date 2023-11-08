@@ -12,10 +12,18 @@ import FirebaseFirestoreSwift
 struct DataView: View {
     @StateObject var viewModel = DatabaseViewModel()
     @StateObject var dataViewModel = DataViewModel()
+    @StateObject var reportViewModel = ReportViewModel()
+    @EnvironmentObject var notificationViewModel: NotificationViewModel
     
     var body: some View {
         NavigationStack {
-            VStack {                
+            VStack {
+                if notificationViewModel.showBanner {
+                    NotificationView(message: "Warning: Reading in Hypertensive Crisis range. Please consult your doctor immediately.", dismissAction: {
+                        notificationViewModel.showBanner.toggle()
+                    })
+                }
+                
                 Text("Add, Edit or Delete Readings\n")
                     .font(.title2)
                 
@@ -54,7 +62,7 @@ struct DataView: View {
                 .disabled(viewModel.selectedUserId.isEmpty)
             }
             .sheet(isPresented: $dataViewModel.isAddingReadingItem) {
-                AddReadingItemView(viewModel: viewModel, dataViewModel: dataViewModel)
+                AddReadingItemView(viewModel: viewModel, dataViewModel: dataViewModel, reportViewModel: reportViewModel)
             }
             .padding()
         }
@@ -66,4 +74,5 @@ struct DataView: View {
 
 #Preview {
     DataView()
+        .environmentObject(NotificationViewModel())
 }
