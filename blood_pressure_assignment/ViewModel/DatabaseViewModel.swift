@@ -57,7 +57,7 @@ class DatabaseViewModel : ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(selectedUserId)
         
-        userRef.collection("readingItems").getDocuments { querySnapshot, error in
+        userRef.collection("readingItems").order(by: "createdDate", descending: true).getDocuments { querySnapshot, error in
             if let error = error {
                 print("Error fetching readingItems: \(error.localizedDescription)")
                 return
@@ -76,8 +76,6 @@ class DatabaseViewModel : ObservableObject {
                     return nil
                 }
             }
-            
-            self.readingItems.sort { $0.createdDate > $1.createdDate }
         }
     }
     
