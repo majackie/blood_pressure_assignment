@@ -12,7 +12,6 @@ class DatabaseViewModel : ObservableObject {
     @Published var selectedUserId = ""
     @Published var users: [User] = []
     @Published var readingItems: [ReadingItem] = []
-    @Published var isAddingReadingItem = false
     
     func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()

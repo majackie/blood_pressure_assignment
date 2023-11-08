@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 
 struct HomeView: View {
     @StateObject var viewModel = DatabaseViewModel()
+    @StateObject var homeViewModel = HomeViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
@@ -50,14 +51,14 @@ struct HomeView: View {
             }
             .toolbar {
                 Button {
-                    viewModel.isAddingReadingItem.toggle()
+                    homeViewModel.isAddingReadingItem.toggle()
                 } label: {
                     Image(systemName: "plus")
                 }
                 .disabled(viewModel.selectedUserId.isEmpty)
             }
-            .sheet(isPresented: $viewModel.isAddingReadingItem) {
-                AddReadingItemView(viewModel: viewModel)
+            .sheet(isPresented: $homeViewModel.isAddingReadingItem) {
+                AddReadingItemView(viewModel: viewModel, homeViewModel: homeViewModel)
             }
             .padding()
         }
