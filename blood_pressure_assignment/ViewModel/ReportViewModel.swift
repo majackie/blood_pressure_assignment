@@ -33,16 +33,14 @@ class ReportViewModel : ObservableObject {
     func calculateAverageCondition(systolic: Double, diastolic: Double) -> String {
         if systolic < 120 && diastolic < 80 {
             return "Normal"
-        } else if (120...129).contains(systolic) && diastolic < 80  {
+        } else if systolic < 130 && diastolic < 80 {
             return "Elevated"
-        } else if (130...139).contains(systolic) || (80...89).contains(diastolic) {
+        } else if systolic < 140 || diastolic < 90 {
             return "Stage 1"
-        } else if (140...179).contains(systolic) || (90...119).contains(diastolic) {
+        } else if systolic < 180 && diastolic < 120 {
             return "Stage 2"
-        } else if systolic > 180 || diastolic > 120 {
-            return "Hypertensive"
         } else {
-            return "NA"
+            return "Hypertensive"
         }
     }
 }
