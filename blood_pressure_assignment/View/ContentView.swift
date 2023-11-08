@@ -17,15 +17,15 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
+            DataView()
+                .tabItem {
+                    Image(systemName: "list.clipboard")
+                    Text("Data")
+                }
             ReportView()
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                     Text("Report")
-                }
-            AboutView()
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("About")
                 }
         }
     }

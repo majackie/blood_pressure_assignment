@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddReadingItemView: View {
     @ObservedObject var viewModel: DatabaseViewModel
-    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var dataViewModel: DataViewModel
     @State var systolic: String = ""
     @State var diastolic: String = ""
     
@@ -24,7 +24,7 @@ struct AddReadingItemView: View {
                     if let systolicValue = Double(systolic), let diastolicValue = Double(diastolic) {
                         if !systolicValue.isNaN && !diastolicValue.isNaN {
                             viewModel.addReadingItem(systolic: systolicValue, diastolic: diastolicValue, createdDate: Date())
-                            homeViewModel.isAddingReadingItem.toggle()
+                            dataViewModel.isAddingReadingItem.toggle()
                             viewModel.fetchReadingItems()
                         } else {
                             print("Invalid input. Systolic and Diastolic must be valid numbers.")
@@ -38,7 +38,7 @@ struct AddReadingItemView: View {
                 )
                 
                 Button("Cancel") {
-                    homeViewModel.isAddingReadingItem.toggle()
+                    dataViewModel.isAddingReadingItem.toggle()
                 }
             }
         }
