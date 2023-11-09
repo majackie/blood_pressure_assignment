@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "blood_pressure.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "blood_pressure.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

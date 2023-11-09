@@ -16,11 +16,6 @@ struct NotificationView: View {
     
     var body: some View {
         VStack {
-            if verticalSizeClass == .regular {
-                Image("blood_pressure")
-                    .padding(.bottom)
-            }
-            
             if notificationViewModel.showBanner {
                 Text(message)
                     .font(.headline)
@@ -40,7 +35,11 @@ struct NotificationView: View {
                         .cornerRadius(5)
                 }
             }
+            
+            if verticalSizeClass == .regular {
+                Image("blood_pressure")
+                    .padding(.bottom)
+            }
         }
-        .padding()
     }
 }
