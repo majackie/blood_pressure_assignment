@@ -5,7 +5,7 @@ Monitor and manage blood pressure readings.
 Keep track of family member's blood pressure readings.
 
 ## Installation
-### Swift (Spotify Integration)
+### Swift
 1. Visit [Google Firebase](https://console.firebase.google.com/)
 2. Create new project
 3. Add an iOS app to your project
